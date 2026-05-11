@@ -51,7 +51,7 @@ layout twice in a row.
 ./scripts/new-deck.sh my-talk
 ```
 
-This copies `templates/deck.html` into `examples/my-talk/index.html` with
+This copies `templates/deck.html` into `projects/my-talk/index.html` with
 paths rewritten. Add/remove `<section class="slide">` blocks to match your
 outline.
 
@@ -89,7 +89,7 @@ Pick **one** accent animation per slide. Everything else should be calm.
 ## 8. Review in-browser
 
 ```bash
-open examples/my-talk/index.html
+open projects/my-talk/index.html
 ```
 
 Walk through every slide with ← →. Press:
@@ -102,13 +102,13 @@ Walk through every slide with ← →. Press:
 
 ```bash
 # single slide
-./scripts/render.sh examples/my-talk/index.html
+./scripts/render.sh projects/my-talk/index.html
 
 # all slides (autodetect count by looking for .slide sections)
-./scripts/render.sh examples/my-talk/index.html all
+./scripts/render.sh projects/my-talk/index.html all
 
 # explicit slide count + output dir
-./scripts/render.sh examples/my-talk/index.html 12 out/my-talk-png
+./scripts/render.sh projects/my-talk/index.html 12 out/my-talk-png
 ```
 
 Output is 1920×1080 by default. Change in `render.sh` if the user wants 3:4

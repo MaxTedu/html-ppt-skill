@@ -5,7 +5,7 @@
 #   new-deck.sh <name> [output-parent-dir]
 #
 # Creates <parent>/<name>/index.html with paths rewritten to point at the
-# skill's shared assets/themes/animations. Defaults to ./examples/.
+# skill's shared assets/themes/animations. Defaults to ./projects/.
 
 set -euo pipefail
 
@@ -15,7 +15,7 @@ if [[ -z "$NAME" ]]; then
   exit 1
 fi
 
-PARENT="${2:-examples}"
+PARENT="${2:-projects}"
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 TEMPLATE="$HERE/templates/deck.html"
 
@@ -31,7 +31,7 @@ if [[ -e "$OUT_DIR" ]]; then
 fi
 mkdir -p "$OUT_DIR"
 
-# templates/deck.html references ../assets/...; for examples/<name>/index.html
+# templates/deck.html references ../assets/...; for projects/<name>/index.html
 # that same relative path (../../assets/...) needs one more ../.
 sed 's|href="../assets/|href="../../assets/|g; s|src="../assets/|src="../../assets/|g; s|data-theme-base="../assets/|data-theme-base="../../assets/|g' \
   "$TEMPLATE" > "$OUT_DIR/index.html"

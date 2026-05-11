@@ -6,9 +6,9 @@ This file is the project entry point for AI agents. Before any PPT generation ta
 
 HTML PPT Studio is an AI-driven static HTML presentation generation system. It converts user ideas/outlines/content into natively runnable HTML decks (zero build, pure HTML/CSS/JS) with real keyboard navigation, presenter mode, and theme switching.
 
-**Core Pipeline**: `Understand Requirements → Pick Theme & Layouts → ⚠️ Confirm Plan with User (MANDATORY GATE) → Scaffold Deck → Author Slides → Add Animations → Quality Review → Export PNG (optional)`
+**Core Pipeline**: `Understand Requirements → Pick Theme & Layouts → ⚠️ Confirm Slide Plan → [🎨 Confirm Image Plan if needed → Generate Images] → Scaffold Deck → Author Slides → Add Animations → Quality Review → Export PNG (optional)`
 
-> **⚠️ THE CONFIRMATION GATE IS MANDATORY.** Do NOT scaffold a deck file or write any slide HTML until the user has explicitly confirmed the plan. See [Confirmation Gate](#confirmation-gate-mandatory) below for the exact protocol.
+> **⚠️ BOTH CONFIRMATION GATES ARE MANDATORY.** Do NOT scaffold a deck file or write any slide HTML until the user has explicitly confirmed the slide plan. If the deck needs AI-generated images, create an image generation plan and get it confirmed separately before any API calls. See [Confirmation Gate](#confirmation-gate-mandatory) and [Image Generation](#image-generation-optional) below.
 
 > Decks requiring speaker scripts (逐字稿): use the `presenter-mode-reveal` full-deck template and write 150-300 words per slide in `<aside class="notes">`.
 >
@@ -78,6 +78,40 @@ Present the plan clearly, then **stop and wait for the user's response.** A good
 - If the user proposes changes, revise only the affected parts of the plan and re-confirm. Do not restart from scratch.
 - If the user provides very specific and detailed content upfront (e.g. a full outline with exact slide content), you may condense the confirmation to the three items above — but still present them and wait.
 
+## Image Generation (Optional)
+
+When slides need real images — cover hero images, product shots, concept illustrations, mood imagery — use the Doubao Seedream API via `scripts/image_gen.py`. Full guide in [`references/image-gen.md`](references/image-gen.md).
+
+### Image Generation Gate
+
+**Before calling the API, you MUST present an image generation plan and get user confirmation.** Format:
+
+```
+## 图片生成计划
+
+| # | 文件名 | Prompt | 尺寸 | 比例 | 用途 |
+|---|--------|--------|------|------|------|
+| 1 | image_001.png | 未来智慧城市，飞行汽车... | 2K | 16:9 | 封面主视觉 |
+| 2 | image_002.png | 微服务架构，信息图风格... | 2K | 16:9 | 第5页架构图 |
+| 3 | image_003.png | 人物剪影，数据流动... | 1K | 3:4 | 小红书用户画像 |
+```
+
+Wait for the user's OK before running the script.
+
+### Quick usage
+
+```bash
+python scripts/image_gen.py "未来城市，电影大片风格..." -o projects/<deck>/images/ --size 2K --aspect-ratio 16:9
+```
+
+Images are auto-named sequentially (`image_001.png`, `image_002.png`, ...) and saved to `projects/<deck>/images/`. Reference them in HTML with relative paths:
+
+```html
+<img src="images/image_001.png" alt="未来城市" style="...object-fit:cover...">
+```
+
+Resolution reference: `16:9` (widescreen slide), `4:3` (classic), `3:4` (小红书 portrait). See [`references/image-gen.md`](references/image-gen.md) for the full resolution table.
+
 ## Execution Requirements
 
 - **ALWAYS** read [`SKILL.md`](SKILL.md) before starting a PPT task.
@@ -85,6 +119,7 @@ Present the plan clearly, then **stop and wait for the user's response.** A good
 - Read [`references/layouts.md`](references/layouts.md) to map each outline item to a layout.
 - Read [`references/animations.md`](references/animations.md) sparingly — only when adding entry effects or canvas FX.
 - If the user mentions **演讲 / 分享 / 逐字稿 / speaker notes**, read [`references/presenter-mode.md`](references/presenter-mode.md) and use the `presenter-mode-reveal` full-deck template.
+- If the deck needs **AI-generated images** (cover hero, product shots, illustrations), read [`references/image-gen.md`](references/image-gen.md) and create an image generation plan for user confirmation before calling the API.
 - For a full step-by-step walkthrough, read [`references/authoring-guide.md`](references/authoring-guide.md).
 - Technical constraints and naming conventions live in [`SKILL.md`](SKILL.md) under "Authoring rules".
 - Theme/icon/template details live in their respective `references/` files and `templates/` directories.
@@ -103,7 +138,10 @@ Convenience summary only — full workflow in [`SKILL.md`](SKILL.md).
 
 ```bash
 # Scaffold a new deck from the starter template
-./scripts/new-deck.sh <deck-name>
+./scripts/new-deck.sh <deck-name> projects
+
+# AI image generation via Doubao Seedream (requires ARK_API_KEY in .env)
+python scripts/image_gen.py "prompt" -o projects/<deck>/images/ --size 2K --aspect-ratio 16:9
 
 # Render slides to PNG (requires Chrome/Chromium)
 ./scripts/render.sh <path/to/index.html>                    # single slide
@@ -123,6 +161,7 @@ Convenience summary only — full workflow in [`SKILL.md`](SKILL.md).
 - [`templates/deck.html`](templates/deck.html) — minimal 6-slide starter template for scaffolding.
 - [`templates/single-page/`](templates/single-page/) — 31 individual layout HTML files with demo data.
 - [`templates/full-decks/`](templates/full-decks/) — 15 complete multi-slide deck templates.
-- [`references/`](references/) — detailed catalogs for themes, layouts, animations, full-decks, presenter mode, and authoring guide.
-- [`examples/`](examples/) — example output decks (user-created decks go here).
-- [`scripts/`](scripts/) — scaffolding (`new-deck.sh`) and PNG export (`render.sh`).
+- [`references/`](references/) — detailed catalogs for themes, layouts, animations, full-decks, presenter mode, image generation, and authoring guide.
+- [`projects/`](projects/) — user project workspace (all generated decks go here).
+- [`scripts/`](scripts/) — scaffolding (`new-deck.sh`), image generation (`image_gen.py`), and PNG export (`render.sh`).
+- [`.env`](.env) — API key configuration for image generation (never commit to git, listed in `.gitignore`).

@@ -97,7 +97,7 @@ Only after those are clear, scaffold the deck and start writing.
 1. **Scaffold a new deck.** From the repo root:
    ```bash
    ./scripts/new-deck.sh my-talk
-   open examples/my-talk/index.html
+   open projects/my-talk/index.html
    ```
 2. **Pick a theme.** Open the deck and press `T` to cycle. Or hard-code it:
    ```html
@@ -113,13 +113,13 @@ Only after those are clear, scaffold the deck and start writing.
    `<script src="../assets/animations/fx-runtime.js"></script>`.
    Catalog in [references/animations.md](references/animations.md).
 5. **Use a full-deck template.** Copy `templates/full-decks/<name>/` into
-   `examples/my-talk/` as a starting point. Each folder is self-contained with
+   `projects/my-talk/` as a starting point. Each folder is self-contained with
    scoped CSS. Catalog in [references/full-decks.md](references/full-decks.md)
    and gallery at `templates/full-decks-index.html`.
 6. **Render to PNG.**
    ```bash
    ./scripts/render.sh templates/theme-showcase.html       # one shot
-   ./scripts/render.sh examples/my-talk/index.html 12      # 12 slides
+   ./scripts/render.sh projects/my-talk/index.html 12      # 12 slides
    ```
 
 ## Authoring rules (important)
@@ -188,7 +188,7 @@ html-ppt/
 ├── scripts/
 │   ├── new-deck.sh                (scaffold a deck from deck.html)
 │   └── render.sh                  (headless Chrome → PNG)
-└── examples/demo-deck/            (complete working deck)
+└── projects/demo-deck/            (complete working deck)
 ```
 
 ## Rendering to PNG
@@ -199,7 +199,7 @@ capture, runtime.js exposes `#/N` deep-links, and render.sh iterates 1..N.
 
 ```bash
 ./scripts/render.sh templates/single-page/kpi-grid.html        # single page
-./scripts/render.sh examples/demo-deck/index.html 8 out-dir    # 8 slides, custom dir
+./scripts/render.sh projects/demo-deck/index.html 8 out-dir    # 8 slides, custom dir
 ```
 
 ## Keyboard cheat sheet
