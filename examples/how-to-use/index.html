@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="tokyo-night">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HTML PPT Studio · 使用指南</title>
+<link rel="stylesheet" href="../../assets/fonts.css">
+<link rel="stylesheet" href="../../assets/base.css">
+<link rel="stylesheet" id="theme-link" href="../../assets/themes/tokyo-night.css">
+<link rel="stylesheet" href="../../assets/animations/animations.css">
+<style>
+.hero{position:relative;height:calc(100vh - 144px);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg)}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(10,12,20,.75))}
+.hero .caption{position:absolute;bottom:48px;left:56px;right:56px;color:#fff;z-index:2}
+.hero h1{font-size:72px;line-height:1;font-weight:800;letter-spacing:-.03em;margin:0}
+.hero p{font-size:20px;opacity:.85;margin:14px 0 0;max-width:60ch}
+.hero .pill{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
+
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:32px}
+.step{position:relative;padding:24px 20px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
+.step .num{position:absolute;top:-20px;left:18px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;box-shadow:var(--shadow)}
+.step h4{margin:16px 0 6px;font-size:16px}
+.step p{font-size:13px;color:var(--text-2);line-height:1.6}
+.step .tag{display:inline-block;margin-top:8px;font-size:11px;padding:3px 10px;border-radius:999px;background:var(--surface-2);color:var(--text-3)}
+
+.showcase-img{width:100%;height:280px;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow)}
+</style>
+</head>
+<body data-themes="tokyo-night,catppuccin-mocha,minimal-white,aurora,neo-brutalism" data-theme-base="../../assets/themes/">
+<div class="deck">
+
+  <!-- 1. 封面 -->
+  <section class="slide" data-title="Cover" style="padding:56px">
+    <div class="hero">
+      <img src="images/image_002.png" alt="封面视觉" class="bg">
+      <div class="overlay"></div>
+      <div class="caption">
+        <span class="pill">HTML PPT Studio</span>
+        <h1 class="mt-s anim-rise-in" data-anim="rise-in">零构建<br>纯静态幻灯片</h1>
+        <p>36 主题 · 31 布局 · 27 动画 · 一键切换 · 演讲者模式</p>
+      </div>
+    </div>
+    <div class="deck-footer"><span class="dim2">html-ppt · 2026</span><span class="slide-number" data-current="1" data-total="7"></span></div>
+    <div class="notes">封面：HTML PPT Studio 是一个纯静态 HTML 幻灯片生成系统，无需构建工具，开箱即用。</div>
+  </section>
+
+  <!-- 2. 概览 -->
+  <section class="slide" data-title="概览">
+    <p class="eyebrow">Overview · 概览</p>
+    <h2 class="h2">三大核心能力</h2>
+    <div class="grid g3 mt-l anim-stagger-list" data-anim-target>
+      <div class="card">
+        <h3 style="font-size:42px;margin:0 0 8px">🎨</h3>
+        <h4>36 套主题</h4>
+        <p class="dim">从极简白到赛博霓虹，按 T 键一键循环切换，所有幻灯片同步更新。</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:42px;margin:0 0 8px">📐</h3>
+        <h4>31 种布局</h4>
+        <p class="dim">封面、目录、数据、代码、时间轴、对比……覆盖 95% 的演示场景。</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:42px;margin:0 0 8px">✨</h3>
+        <h4>27 种动效</h4>
+        <p class="dim">CSS 入场动画 + Canvas FX 粒子特效，按 A 键即时预览。</p>
+      </div>
+    </div>
+    <div class="deck-footer"><span class="dim2">html-ppt</span><span class="slide-number" data-current="2" data-total="7"></span></div>
+    <div class="notes">概览页：系统由主题、布局、动画三大模块组成，全部通过模板驱动。</div>
+  </section>
+
+  <!-- 3. 快速上手 -->
+  <section class="slide" data-title="快速上手">
+    <p class="kicker">Quick Start · 五分钟上手</p>
+    <h2 class="h2">从零到演示，只需五步</h2>
+    <div class="steps anim-stagger-list" data-anim-target>
+      <div class="step"><div class="num">1</div><h4>创建</h4><p>运行 <code>new-deck.sh</code> 生成脚手架。</p><span class="tag">~10s</span></div>
+      <div class="step"><div class="num">2</div><h4>选主题</h4><p>按 <b>T</b> 循环预览 36 套主题。</p><span class="tag">~30s</span></div>
+      <div class="step"><div class="num">3</div><h4>选布局</h4><p>从 <code>single-page/</code> 复制所需页型。</p><span class="tag">~2min</span></div>
+      <div class="step"><div class="num">4</div><h4>填内容</h4><p>替换 demo 数据，保留结构。</p><span class="tag">~5min</span></div>
+      <div class="step"><div class="num">5</div><h4>导出</h4><p>运行 <code>render.sh</code> 生成 PNG。</p><span class="tag">~1min</span></div>
+    </div>
+    <div class="deck-footer"><span class="dim2">html-ppt</span><span class="slide-number" data-current="3" data-total="7"></span></div>
+    <div class="notes">快速上手页：五个步骤分别是创建脚手架、选择主题、挑选布局、填写内容、导出图片。</div>
+  </section>
+
+  <!-- 4. 主题 & 布局 -->
+  <section class="slide" data-title="主题与布局">
+    <p class="kicker">Themes & Layouts · 主题与布局</p>
+    <h2 class="h2">一键换肤 · 即拷即用</h2>
+    <div class="grid g2 mt-l" style="align-items:start;gap:28px">
+      <div>
+        <div class="card mb-m">
+          <h4>🎨 36 套主题</h4>
+          <p class="dim">每个主题是一组 CSS 变量（tokens），覆盖颜色、字体、圆角、阴影。切换主题 = 切换整组变量，所有页面同步更新。</p>
+          <p class="dim mt-s"><code>minimal-white</code> · <code>tokyo-night</code> · <code>cyberpunk-neon</code> · <code>xiaohongshu-white</code> …</p>
+        </div>
+        <div class="card">
+          <h4>📐 31 种布局</h4>
+          <p class="dim">每个布局是独立的 HTML 片段，包含完整结构和演示数据。复制到 deck 中，替换内容即可。</p>
+          <p class="dim mt-s"><code>cover</code> · <code>toc</code> · <code>kpi-grid</code> · <code>code</code> · <code>timeline</code> …</p>
+        </div>
+      </div>
+      <div>
+        <img src="images/image_001.png" alt="主题展示" class="showcase-img">
+        <p class="dim" style="text-align:center;margin-top:10px;font-size:13px">36 主题 × 31 布局 = 无限组合</p>
+      </div>
+    </div>
+    <div class="deck-footer"><span class="dim2">html-ppt</span><span class="slide-number" data-current="4" data-total="7"></span></div>
+    <div class="notes">主题与布局页：主题通过 CSS 变量实现，布局通过可复用的 HTML 片段实现，二者解耦。</div>
+  </section>
+
+  <!-- 5. 核心数据 -->
+  <section class="slide" data-title="核心数据">
+    <p class="kicker">Numbers · 关键数字</p>
+    <h2 class="h2">系统规模一览</h2>
+    <div class="grid g4 mt-l anim-stagger-list" data-anim-target>
+      <div class="card" style="text-align:center">
+        <p class="eyebrow">Themes</p>
+        <div style="font-size:64px;font-weight:800"><span class="counter gradient-text" data-to="36">0</span></div>
+        <p class="dim">一键切换</p>
+      </div>
+      <div class="card" style="text-align:center">
+        <p class="eyebrow">Layouts</p>
+        <div style="font-size:64px;font-weight:800"><span class="counter gradient-text" data-to="31">0</span></div>
+        <p class="dim">即拷即用</p>
+      </div>
+      <div class="card" style="text-align:center">
+        <p class="eyebrow">Animations</p>
+        <div style="font-size:64px;font-weight:800"><span class="counter gradient-text" data-to="27">0</span></div>
+        <p class="dim">CSS + Canvas</p>
+      </div>
+      <div class="card" style="text-align:center">
+        <p class="eyebrow">Build</p>
+        <div style="font-size:64px;font-weight:800"><span class="gradient-text">0</span></div>
+        <p class="dim">纯静态零构建</p>
+      </div>
+    </div>
+    <div class="deck-footer"><span class="dim2">html-ppt</span><span class="slide-number" data-current="5" data-total="7"></span></div>
+    <div class="notes">数据页：36 主题、31 布局、27 动画、零构建步骤。</div>
+  </section>
+
+  <!-- 6. 键盘 & 演讲模式 -->
+  <section class="slide" data-title="键盘与演讲模式">
+    <p class="kicker">Runtime · 键盘与演讲模式</p>
+    <h2 class="h2">翻页、换主题、开提词器</h2>
+    <p class="lede mb-l">所有 deck 内置 runtime.js，打开浏览器即可演示。</p>
+    <ul class="grid g1 anim-stagger-list" style="list-style:none;padding:0;margin:0;gap:14px" data-anim-target>
+      <li class="card card-accent">
+        <h4>⌨️ 导航 · <code>← → Space PgUp PgDn</code></h4>
+        <p class="dim">方向键与空格翻页，Home / End 直达首尾，O 键打开幻灯片概览网格。</p>
+      </li>
+      <li class="card card-accent">
+        <h4>🎨 主题 · <code>T</code>　/　动画 · <code>A</code>　/　全屏 · <code>F</code></h4>
+        <p class="dim">T 循环切换主题，A 切换当前页动画，F 进入全屏演示模式。</p>
+      </li>
+      <li class="card card-accent">
+        <h4>🎤 演讲者模式 · <code>S</code></h4>
+        <p class="dim">S 键弹出独立窗口：当前幻灯片预览 + 下页预览 + 逐字稿 + 计时器，支持拖拽布局。</p>
+      </li>
+    </ul>
+    <div class="deck-footer"><span class="dim2">html-ppt</span><span class="slide-number" data-current="6" data-total="7"></span></div>
+    <div class="notes">键盘页：runtime.js 提供键盘导航、主题切换、动画预览和演讲者模式。</div>
+  </section>
+
+  <!-- 7. 感谢页 -->
+  <section class="slide center tc" data-title="Thanks">
+    <div>
+      <h1 class="h1 anim-fade-up" data-anim="fade-up" style="font-size:160px;line-height:1"><span class="gradient-text">Thanks</span></h1>
+      <p class="lede" style="margin:18px auto 0">开始你的第一个 deck</p>
+      <div class="row mt-l" style="justify-content:center;gap:24px;flex-wrap:wrap">
+        <code class="pill pill-accent">./scripts/new-deck.sh my-deck</code>
+        <span class="dim">→ 打开 projects/my-deck/index.html</span>
+      </div>
+    </div>
+    <div class="deck-footer"><span class="dim2">html-ppt · MIT</span><span class="slide-number" data-current="7" data-total="7"></span></div>
+    <div class="notes">感谢页：用 new-deck.sh 创建第一个 deck，直接在浏览器中打开即可演示。</div>
+  </section>
+
+</div>
+<script src="../../assets/runtime.js"></script>
+</body></html>

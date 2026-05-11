@@ -1,0 +1,7 @@
+# html-ppt — Python dependencies
+# Only needed for AI image generation (scripts/image_gen.py).
+# The rest of the project is pure static HTML/CSS/JS — no build tools required.
+
+openai>=1.0.0          # Doubao Seedream API (OpenAI-compatible)
+python-dotenv>=1.0.0   # Load ARK_API_KEY from .env
+requests>=2.31.0       # Download generated images
