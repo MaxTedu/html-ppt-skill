@@ -140,7 +140,10 @@ def generate_image(
     file_size_kb = len(r.content) / 1024
     print(f"saved: {out_path} ({file_size_kb:.0f} KB)")
 
-    rel = out_path.relative_to(PROJECT_ROOT).as_posix()
+    try:
+        rel = out_path.relative_to(PROJECT_ROOT).as_posix()
+    except ValueError:
+        rel = out_path.as_posix()
     print(f"relative: {rel}")
 
     return rel
